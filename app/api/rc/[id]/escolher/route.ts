@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const s = await lerSessao();
-  if (!s || !['compras', 'admin_root'].includes(s.papel)) {
+  if (!s || !['compras', 'admin'].includes(s.papel)) {
     return NextResponse.json({ error: 'sem permissão' }, { status: 403 });
   }
   const { cotacao_id, justificativa } = await req.json();
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   await sql`UPDATE rc_requisicoes SET status = 'Aguardando Aprovação', atualizado_em = now() WHERE id = ${params.id}`;
 
   const rc = (await sql`SELECT protocolo FROM rc_requisicoes WHERE id = ${params.id}`)[0];
-  await notificarPapel(['financeiro', 'admin_root'], Number(params.id),
+  await notificarPapel(['gestor', 'admin'], Number(params.id),
     `Autorizar compra - RC ${rc.protocolo}`,
     `${escolhida.fornecedor} - R$ ${Number(escolhida.valor_total).toFixed(2)}. Autorize pelo painel.`);
   return NextResponse.json({ ok: true });

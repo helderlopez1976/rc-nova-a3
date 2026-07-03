@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const s = await lerSessao();
-  if (!s || !['financeiro', 'admin_root'].includes(s.papel)) {
+  if (!s || !['gestor', 'admin'].includes(s.papel)) {
     return NextResponse.json({ error: 'sem permissão' }, { status: 403 });
   }
   const { decisao, motivo } = await req.json();

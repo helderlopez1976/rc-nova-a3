@@ -33,14 +33,17 @@ export default function TopBar({ papel }: { papel: string }) {
     router.push('/login');
   }
 
-  const podePainel = ['compras', 'financeiro', 'admin_root'].includes(papel);
+  const podePainel = ['compras', 'gestor', 'admin'].includes(papel);
+  const podeUsuarios = papel === 'admin';
 
   return (
     <div className="topbar">
       <div className="brand">NOVA<span>·</span>A3 · RC</div>
       <nav>
         {podePainel && <a href="/painel">Painel</a>}
+        <a href="/my">Minhas RC</a>
         <a href="/rc/nova">Nova RC</a>
+        {podeUsuarios && <a href="/usuarios">Usuários</a>}
         <div className="sino" onClick={abrir}>
           🔔{naoLidas > 0 && <span className="badge">{naoLidas}</span>}
         </div>

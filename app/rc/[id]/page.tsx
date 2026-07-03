@@ -100,10 +100,10 @@ export default function DetalheRC() {
           </div>
         )}
 
-        {/* Aprovação do financeiro */}
+        {/* Aprovação do gestor */}
         {rc.status === 'Aguardando Aprovação' && vencedora && (
           <div className="card">
-            <h2>Autorização (Financeiro)</h2>
+            <h2>Autorização (Gestor)</h2>
             <div className="msg msg-info">
               Vencedor: <b>{vencedora.fornecedor}</b> — R$ {Number(vencedora.valor_total).toFixed(2)}
               {vencedora.justificativa && <><br />Justificativa: {vencedora.justificativa}</>}
@@ -114,7 +114,7 @@ export default function DetalheRC() {
               <button className="btn btn-ok" onClick={() => decidir('aprovado')}>Aprovar compra</button>
               <button className="btn btn-danger" onClick={() => decidir('reprovado')}>Reprovar</button>
             </div>
-            <div className="sub mt">Se o botão der "sem permissão", entre como financeiro@novaa3.com.br.</div>
+            <div className="sub mt">Se o botão der "sem permissão", entre como gestor@novaa3.com.br.</div>
           </div>
         )}
 

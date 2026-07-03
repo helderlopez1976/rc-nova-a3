@@ -18,8 +18,9 @@ export async function initSchema() {
       nome VARCHAR(150) NOT NULL,
       email VARCHAR(200) UNIQUE NOT NULL,
       senha_hash VARCHAR(255) NOT NULL,
-      papel VARCHAR(20) NOT NULL DEFAULT 'solicitante',
+      papel VARCHAR(20) NOT NULL DEFAULT 'user',
       setor VARCHAR(150),
+      ativo BOOLEAN NOT NULL DEFAULT true,
       criado_em TIMESTAMPTZ NOT NULL DEFAULT now()
     )`;
 

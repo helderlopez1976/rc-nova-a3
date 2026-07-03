@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   const status = req.nextUrl.searchParams.get('status') || '';
   let rows;
-  if (s.papel === 'solicitante') {
+  if (s.papel === 'user') {
     rows = status
       ? await sql`SELECT * FROM rc_requisicoes WHERE user_id = ${s.id} AND status = ${status} ORDER BY criado_em DESC`
       : await sql`SELECT * FROM rc_requisicoes WHERE user_id = ${s.id} ORDER BY criado_em DESC`;
@@ -44,6 +44,6 @@ export async function POST(req: NextRequest) {
     VALUES (${protocolo}, ${s.id}, ${s.nome}, ${setor}, ${tipo_solicitacao || 'Compra de Material'}, ${justificativa}, ${JSON.stringify(itens)}, ${valor})
     RETURNING id, protocolo`;
 
-  await notificarPapel(['compras', 'admin_root'], rows[0].id, `Nova RC ${protocolo}`, `${s.nome} abriu uma requisição (${setor}).`);
+  await notificarPapel(['compras', 'admin'], rows[0].id, `Nova RC ${protocolo}`, `${s.nome} abriu uma requisição (${setor}).`);
   return NextResponse.json(rows[0]);
 }

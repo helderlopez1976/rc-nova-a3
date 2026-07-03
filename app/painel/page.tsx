@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 export default async function Painel({ searchParams }: { searchParams: { status?: string } }) {
   const s = await lerSessao();
   if (!s) redirect('/login');
-  if (!['compras', 'financeiro', 'admin_root'].includes(s.papel)) redirect('/rc/nova');
+  if (!['compras', 'gestor', 'admin'].includes(s.papel)) redirect('/rc/nova');
 
   const filtro = searchParams.status || '';
   const lista = filtro
@@ -63,7 +63,7 @@ export default async function Painel({ searchParams }: { searchParams: { status?
                       <td>
                         <div className="flex flex-wrap">
                           <a className="btn btn-sec btn-sm" href={`/rc/${r.id}`}>Ver</a>
-                          {['compras', 'admin_root'].includes(s.papel) && <a className="btn btn-sm" href={`/mapa/${r.id}`}>Mapa</a>}
+                          {['compras', 'admin'].includes(s.papel) && <a className="btn btn-sm" href={`/mapa/${r.id}`}>Mapa</a>}
                         </div>
                       </td>
                     </tr>

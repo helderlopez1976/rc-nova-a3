@@ -89,7 +89,7 @@ export default function NovaRC() {
 
   return (
     <>
-      <TopBar papel="solicitante" />
+      <TopBar papel="user" />
       <div className="page-wrapper">
         <div className="page">
           {erro && <div className="alert alert-error">{erro}</div>}

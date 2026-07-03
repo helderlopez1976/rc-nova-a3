@@ -18,7 +18,7 @@ export default function MinhasRC() {
 
   return (
     <>
-      <TopBar papel="solicitante" />
+      <TopBar papel="user" />
       <div className="wrap">
         <h1>Minhas Requisições</h1>
         <div className="sub">Acompanhe o andamento das suas RC</div>

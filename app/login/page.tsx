@@ -43,7 +43,7 @@ export default function Login() {
           </button>
         </form>
         <div className="msg msg-info mt" style={{ fontSize: 12 }}>
-          Teste: compras@novaa3.com.br / financeiro@novaa3.com.br / solicitante@novaa3.com.br — senha <b>nova123</b>
+          Teste (senha <b>nova123</b>): hlopez@novaa3.com.br (admin), compras@novaa3.com.br, gestor@novaa3.com.br, tecnico@novaa3.com.br, usuario@novaa3.com.br
         </div>
       </div>
     </div>
