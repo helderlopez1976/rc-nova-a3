@@ -58,14 +58,23 @@ export default function DetalheRC() {
 
         <div className="card">
           <h2>Itens</h2>
-          <table>
-            <thead><tr><th>Descrição</th><th>Qtd</th><th>Unid.</th><th>Valor unit.</th></tr></thead>
-            <tbody>
-              {(rc.itens || []).map((it: any, i: number) => (
-                <tr key={i}><td>{it.descricao}</td><td>{it.quantidade}</td><td>{it.unidade}</td><td>R$ {Number(it.valor_unit).toFixed(2)}</td></tr>
-              ))}
-            </tbody>
-          </table>
+          <div style={{ overflowX: 'auto' }}>
+            <table>
+              <thead><tr><th>Descrição</th><th>Qtd</th><th>Un</th><th>Valor unit.</th><th>Total</th><th>Últ. compra</th></tr></thead>
+              <tbody>
+                {(rc.itens || []).map((it: any, i: number) => (
+                  <tr key={i}>
+                    <td>{it.descricao}</td>
+                    <td>{it.quantidade}</td>
+                    <td>{it.unidade}</td>
+                    <td>R$ {Number(it.valor_unitario || 0).toFixed(2)}</td>
+                    <td>R$ {Number(it.total || (Number(it.quantidade) * Number(it.valor_unitario))).toFixed(2)}</td>
+                    <td>{it.ultima_compra ? 'R$ ' + Number(it.ultima_compra).toFixed(2) : '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <div className="mt" style={{ textAlign: 'right', fontWeight: 700, color: '#12263a' }}>
             Estimativa: R$ {Number(rc.valor_estimado).toFixed(2)}
           </div>

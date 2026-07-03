@@ -30,6 +30,7 @@ export async function initSchema() {
       user_id INT NOT NULL REFERENCES rc_users(id),
       solicitante_nome VARCHAR(150) NOT NULL,
       setor VARCHAR(150) NOT NULL,
+      tipo_solicitacao VARCHAR(50) NOT NULL DEFAULT 'Compra de Material',
       justificativa TEXT NOT NULL,
       itens JSONB NOT NULL DEFAULT '[]',
       valor_estimado NUMERIC(14,2) NOT NULL DEFAULT 0,

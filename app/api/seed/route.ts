@@ -8,6 +8,8 @@ export const dynamic = 'force-dynamic';
 // e os usuários de demonstração.
 export async function GET() {
   await initSchema();
+  // Garante colunas novas mesmo se o banco já existia (migração leve)
+  await sql`ALTER TABLE rc_requisicoes ADD COLUMN IF NOT EXISTS tipo_solicitacao VARCHAR(50) NOT NULL DEFAULT 'Compra de Material'`;
 
   const existentes = await sql`SELECT COUNT(*)::int AS n FROM rc_users`;
   if (existentes[0].n > 0) {

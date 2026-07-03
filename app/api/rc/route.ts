@@ -29,19 +29,19 @@ export async function POST(req: NextRequest) {
   const s = await lerSessao();
   if (!s) return NextResponse.json({ error: 'não autenticado' }, { status: 401 });
 
-  const { setor, justificativa, itens } = await req.json();
+  const { setor, tipo_solicitacao, justificativa, itens } = await req.json();
   if (!setor || !justificativa || !Array.isArray(itens) || itens.length === 0) {
     return NextResponse.json({ error: 'Preencha setor, justificativa e ao menos um item' }, { status: 400 });
   }
 
-  const valor = itens.reduce((acc: number, i: any) => acc + Number(i.quantidade || 0) * Number(i.valor_unit || 0), 0);
+  const valor = itens.reduce((acc: number, i: any) => acc + Number(i.quantidade || 0) * Number(i.valor_unitario || 0), 0);
   const ano = new Date().getFullYear();
   const seqRows = await sql`SELECT COUNT(*)::int AS n FROM rc_requisicoes WHERE protocolo LIKE ${'RC-' + ano + '-%'}`;
   const protocolo = `RC-${ano}-${String(seqRows[0].n + 1).padStart(4, '0')}`;
 
   const rows = await sql`
-    INSERT INTO rc_requisicoes (protocolo, user_id, solicitante_nome, setor, justificativa, itens, valor_estimado)
-    VALUES (${protocolo}, ${s.id}, ${s.nome}, ${setor}, ${justificativa}, ${JSON.stringify(itens)}, ${valor})
+    INSERT INTO rc_requisicoes (protocolo, user_id, solicitante_nome, setor, tipo_solicitacao, justificativa, itens, valor_estimado)
+    VALUES (${protocolo}, ${s.id}, ${s.nome}, ${setor}, ${tipo_solicitacao || 'Compra de Material'}, ${justificativa}, ${JSON.stringify(itens)}, ${valor})
     RETURNING id, protocolo`;
 
   await notificarPapel(['compras', 'admin_root'], rows[0].id, `Nova RC ${protocolo}`, `${s.nome} abriu uma requisição (${setor}).`);
