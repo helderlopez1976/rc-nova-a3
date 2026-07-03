@@ -38,7 +38,12 @@ export default function TopBar({ papel }: { papel: string }) {
 
   return (
     <div className="topbar">
-      <div className="brand">NOVA<span>·</span>A3 · RC</div>
+      <div className="brand">
+        <img src="https://www.novaa3.com.br/ops/imagens/logo_novaa3-branca.png" alt="Nova A3"
+             style={{ height: 26, width: 'auto', verticalAlign: 'middle' }}
+             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+        <span style={{ marginLeft: 8, fontWeight: 700 }}>RC</span>
+      </div>
       <nav>
         {podePainel && <a href="/painel">Painel</a>}
         <a href="/my">Minhas RC</a>

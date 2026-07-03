@@ -96,7 +96,10 @@ export default function NovaRC() {
           {ok && <div className="alert alert-success">{ok}</div>}
 
           <div className="doc-header">
-            <div className="logo"><div className="logo-txt">NOVA·A3</div></div>
+            <div className="logo">
+              <img src="https://www.novaa3.com.br/ops/imagens/logo_novaa3.png" alt="Nova A3"
+                   style={{ maxHeight: 56, width: 'auto' }} />
+            </div>
             <div className="title-section">
               <h1>REQUISIÇÃO DE COMPRAS</h1>
               <div className="subtitle">Nova A3 - Sistema de Gestão de Compras</div>

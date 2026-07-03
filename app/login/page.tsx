@@ -24,8 +24,10 @@ export default function Login() {
   return (
     <div className="wrap">
       <div className="card login-box">
-        <div className="brand" style={{ color: '#12263a', fontWeight: 800, fontSize: 22, marginBottom: 4 }}>
-          NOVA·A3 <span style={{ color: '#63abe1' }}>RC</span>
+        <div style={{ marginBottom: 8 }}>
+          <img src="https://www.novaa3.com.br/ops/imagens/logo_novaa3.png" alt="Nova A3"
+               style={{ maxHeight: 48, width: 'auto' }} />
+          <span style={{ marginLeft: 10, color: '#63abe1', fontWeight: 800, fontSize: 22, verticalAlign: 'middle' }}>RC</span>
         </div>
         <div className="sub">Requisições de Compra</div>
         {erro && <div className="msg msg-erro">{erro}</div>}
